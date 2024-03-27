@@ -285,11 +285,11 @@
 // Tab Style 07
 .tab-style-07 {
   .nav-item {
-    @apply sm:border-b-[1px] py-0 px-[20px] lg:px-[10px];
+    @apply sm:border-b-[1px] py-0 px-[0px] lg:px-[0px];
   }
 
   .nav-link {
-    padding: 30px 40px 28px 40px;
+    padding: 0px;
     transition-duration: 0.3s;
     @apply leading-[26px] lg:pt-[30px] lg:px-[30px] lg:pb-[28px] md:mb-[18px] sm:py-[10px];
 

@@ -29,7 +29,7 @@ export default function UserContextComp({ children }) {
     })
 
     // Unsubscribe auth listener on unmount
-    return () => unsubscriber()
+    return unsubscriber
   }, [])
 
   return (

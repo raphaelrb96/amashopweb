@@ -1,9 +1,9 @@
-import { collection, getDocs, getFirestore, limit, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, getFirestore, initializeFirestore, limit, orderBy, query } from "firebase/firestore";
 import { createFirebaseApp } from "../firebase/clienteApp";
 
 export const getProdutos = async () => {
   
-    const db = getFirestore(createFirebaseApp(),{
+    const db = initializeFirestore(createFirebaseApp(),{
       experimentalForceLongPolling: true,
     })
     const profileCollection = collection(db, 'Produtos');

@@ -1,4 +1,4 @@
-import { initializeApp, getApps } from 'firebase/app'
+import { initializeApp, getApps, getApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
 
 export const createFirebaseApp = () => {
@@ -14,6 +14,7 @@ export const createFirebaseApp = () => {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
   }
 
+
   const firebaseConfig = {
     apiKey: "AIzaSyDxF4_yts6ytjHFJ9eMWBeBS4LSSDidLww",
     authDomain: "amashop-rapha.firebaseapp.com",
@@ -25,8 +26,8 @@ export const createFirebaseApp = () => {
     measurementId: "G-RM7L7MGJF9"
   };
 
-  if (getApps().length <= 0) {
-    const app = initializeApp(firebaseConfig)
+  if (getApps().length === 0) {
+    const app = initializeApp(firebaseConfig);
     // Check that `window` is in scope for the analytics module!
     if (typeof window !== 'undefined') {
       // Enable analytics. https://firebase.google.com/docs/analytics/get-started
@@ -34,6 +35,8 @@ export const createFirebaseApp = () => {
         //getAnalytics(app)
       }
     }
-    return app
+    return app;
+  } else {
+    return getApp();
   }
 }

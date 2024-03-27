@@ -13,7 +13,7 @@ const RodapeUm = (props) => {
   const {dark} = props;
 
   return (
-      <footer className="py-[30px] px-[30px] w-full ">
+      <footer className="py-[30px] px-[30px] pb-[86px] w-full ">
 
           <Grid container alignItems={"center"} justifyContent={"center"} alignContent={"center"} className="items-center">
 

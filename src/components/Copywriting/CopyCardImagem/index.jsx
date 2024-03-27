@@ -1,12 +1,14 @@
 "use client"
 
-import { Container, Grid, Link } from "@mui/material"
+import { Container, Grid, Link, Typography } from "@mui/material"
 import "../../../Assets/scss/components/_iconwithtext.scss"
 import { memo } from "react"
 import { IconWithTextData_01 } from "../../../functions/examples"
 import { PropTypes } from "prop-types";
 import Buttons from "../../Button/Buttons"
-import { motion, m } from "framer-motion"
+import { motion, m } from "framer-motion";
+import GppGoodIcon from '@mui/icons-material/GppGood';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 import BannerRotativo from '../../InterativeBanners/BannerRotativo'
 import Overlap from '../../Overlap'
@@ -29,7 +31,7 @@ const CopyCardImagem = (props) => {
           <Grid sm={12} item>
             <TextCopy data={props.data} />
           </Grid>
-          
+
           <Grid item xs={12} sm={8} md={12} lg={12} className="justify-center mb-6" justifyContent="center" alignItems={'center'} alignContent={'center'}>
             <ListaItemClean
               overlay={["#f3c7f2", "#445a58"]}
@@ -37,9 +39,26 @@ const CopyCardImagem = (props) => {
             />
           </Grid>
 
-          <div className="xs:text-center mt-20">
-            <Buttons ariaLabel="link for pricing-packages" onClick={click ? click : null} icon="fa-brands fa-whatsapp" className="mr-[0px] xs:mx-0 xs:w-full sm:mx-[14px] font-serif hover:text-gray-100 uppercase xs:mb-[25px] sm:mb-[25px] md:mb-[15px]" themeColor={["#008C72", "#02A676"]} size="xl" color="#fff" title={btn} />
-          </div>
+          <Grid item xs={12} md={8} lg={6}>
+            <div className="xs:text-center mt-20">
+              <Buttons ariaLabel="link for pricing-packages" onClick={click ? click : null} icon="fa-solid fa-money-bill-wave" className="mr-[0px] xs:mx-0 xs:w-full sm:mx-[5px] font-serif hover:text-gray-100 uppercase mb-[25px]" themeColor={["#008C72", "#02A676"]} size="xl" color="#fff" title={btn} />
+              <span className="flex items-center justify-center sm:mb-[4px] mb-[6px]">
+                <CreditScoreIcon className={`text-[18px] text-[#02A676] mr-3`} />
+                <Typography className="text-[12px] font-medium text-[#02A676] text-center" variant="p">
+                  PAGAMENTO ONLINE SEGURO
+                </Typography>
+
+              </span>
+              <span className="flex items-center justify-center sm:mb-[6px] mb-[16px]">
+                <GppGoodIcon className={`text-[18px] text-[#02A676] mr-3`} />
+                <Typography className="text-[12px] font-medium text-[#02A676] text-center" variant="p">
+                  GARANTIA DE 90 DIAS
+                </Typography>
+
+              </span>
+            </div>
+          </Grid>
+
         </Grid>
       </Container>
     </section>

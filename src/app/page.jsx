@@ -1,11 +1,24 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import GridProdutos from '../components/GridProdutos';
+import GridProdutos from '../components/GridProdutos.tsx';
 import { getProdutos } from '../fetchData/getProdutos';
 import RootLayout from './layout';
 import Home from '../layouts/Home';
 import TesteTres from '../layouts/TesteTres';
+import { Container, Grid } from '@mui/material';
+import LeftSideMenu from '../components/SideMenu/LeftSideMenu/index.tsx';
+import Pb from '../components/Pb.jsx';
+import CategoriaUm from '../components/Categorias/CategoriaUm';
+import ContainerInfoEcom from '../components/Containers/ContainerInfoEcom';
+import HeaderTitleEcom from '../components/Texto/HeaderTitleEcom';
+import HeroVideoUm from '../components/Hero/HeroVideoUm';
+import HeroSlideSwipe from '../components/Hero/HeroSlideSwipe';
+import ResponsiveAppBar from '../components/Headers/ResponsiveAppBar';
+
+
+
+
 
 const obj = {
   produto: {
@@ -252,6 +265,39 @@ export const metadata = {
   title: 'Escova Alisadora',
 }
 
+function ContentDinamic({ produtos }) {
+  if (!produtos) {
+    return <Pb />;
+  }
+  return (
+    <>
+      <Grid item xs={11} lg={10}>
+        <CategoriaUm />
+      </Grid>
+      <HeaderTitleEcom />
+      <Grid item xs={12} md={3}>
+        <LeftSideMenu />
+      </Grid>
+      <Grid item xs={12} md={9}>
+        <GridProdutos
+          lista={produtos}
+        />
+      </Grid>
+    </>
+  );
+};
+
+function ContentFix() {
+  return (
+    <>
+      <HeroSlideSwipe />
+      <Grid item xs={12} lg={10}>
+        <ContainerInfoEcom />
+      </Grid>
+    </>
+  );
+}
+
 export default function App() {
 
   const [produtos, setProdutos] = useState(null);
@@ -259,37 +305,36 @@ export default function App() {
 
   useEffect(() => {
 
-    return;
+    const fetch = async () => {
+      await getProdutos().then((prods) => {
+        if (prods) {
 
-    getProdutos().then((prods) => {
-      if(prods) {
-        
-        console.log(prods.length);
-        setProdutos(prods);
-      }
-    });
-    
+          console.log(prods.length);
+          setProdutos(prods);
+        }
+      });
+    }
+
+    fetch();
+
+
   }, []);
 
-  
+
+  // return (
+  //   <RootLayout>
+  //     <TesteTres object={obj} />
+  //   </RootLayout>
+  // );
 
 
   return (
     <RootLayout>
-      <TesteTres object={obj} />
-    </RootLayout>
-  );
-
-  return (
-    <RootLayout>
-      <main>
-
-        <GridProdutos 
-          lista={produtos} 
-          pixel={pixel} 
-        />
-
-      </main>
+      <Grid justifyContent="center" spacing={1} container>
+        <ResponsiveAppBar />
+        <ContentFix />
+        <ContentDinamic produtos={produtos} />
+      </Grid>
     </RootLayout>
   )
 }

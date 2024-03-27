@@ -6,13 +6,15 @@ import { getProdutos } from '../../fetchData/getProdutos';
 import RootLayout from './../layout';
 import TesteTres from '../../layouts/TesteTres';
 import Script from 'next/script';
+import { registerEvent } from '../../fetchData/registerEvent';
+import { Fab, Typography } from '@mui/material';
 
 const obj = {
   produto: {
     urlVideo: '',
     img: '',
     subhead: 'Resultados Profissionais em Casa',
-    btn: 'Iniciar Conversa',
+    btn: 'Comprar Agora',
     headline: 'Tenha resultados de salão sem sair de casa, economizando tempo e dinheiro.',
     description: 'Desfrute de cabelos perfeitos de salão sem sair de casa! Com a nossa incrível Escova Alisadora você pode obter resultados profissionais no conforto do seu lar',
     list: [
@@ -35,10 +37,6 @@ const obj = {
       {
         icon: "fas fa-check",
         content: "Cabelos Fortes e Protegidos",
-      },
-      {
-        icon: "fas fa-check",
-        content: "Efeito Duradouro que elimina o Frizz",
       },
     ],
   },
@@ -79,7 +77,7 @@ const obj = {
     subTitle: 'Descubra a revolução da beleza capilar',
     title: 'Apresentamos a solução definitiva para um cabelo impecável',
     headline: 'Você vai realizar seu sonho de ter um cabelo perfeitamente liso e radiante todos os dias',
-    btn: 'Iniciar Conversa',
+    btn: 'Comprar Agora',
     content: [
       {
         id: 1,
@@ -186,8 +184,8 @@ const obj = {
       },
     ],
     keys: [
-      'Apenas: R$97,90',
-      'Frete Grátis',
+      'Apenas: R$ 60,00',
+      'Frete Justo',
       'Entrega Rápida',
       'Satisfação Garantida'
     ],
@@ -205,7 +203,7 @@ const obj = {
     ],
     btn: 'Comprar Agora',
     title: 'Não espere mais para conquistar um cabelo incrivelmente liso e radiante. Peça a sua Escova Alisadora hoje mesmo!',
-    headline: 'R$ 97,90',
+    headline: 'R$ 60,00',
   },
   duvidas: {
     subTitle: 'Veja nossas perguntas frequentes',
@@ -241,9 +239,9 @@ const obj = {
   ctaExtra: {
     btn: 'Comprar Agora',
     btnExtra: 'Mais Informções',
-    preco: 'Por Apenas R$97,90',
+    preco: 'Por Apenas R$60,00',
     headline: 'Sua autoestima merece um upgrade. Compre já e eleve seu estilo e elegancia!',
-    text: "Aproveite o Fenômeno de 2023: Um dos Produtos Mais Vendidos no Brasil Está a Um Clique de Distância!",
+    text: "Aproveite o Fenômeno do ano: Um dos Produtos Mais Vendidos no Brasil Está a Um Clique de Distância!",
   }
 }
 
@@ -256,6 +254,8 @@ export default function EscovaPage() {
 
   const [produtos, setProdutos] = useState(null);
   const [pixel, setPixel] = useState(undefined);
+
+ 
 
   useEffect(() => {
 
@@ -309,7 +309,7 @@ export default function EscovaPage() {
               fbq('init', 625741005706556);
 
               fbq('track', 'PageView');
-              fbq('track', 'ViewContent', { content_ids: ['escova-alisadora'], content_type: 'product'});
+              fbq('track', 'ViewContent', { content_ids: ['148541183'], content_type: 'product'});
 
             `,
         }}
@@ -318,6 +318,7 @@ export default function EscovaPage() {
 
 
       <TesteTres object={obj} />
+
 
     </RootLayout>
   );

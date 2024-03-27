@@ -19,7 +19,7 @@ const ListaItemClean = (props) => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, ease: "easeOut" }} >
 
-                        <div className="blog-post-img relative overflow-hidden" style={style}>
+                        <div className="blog-post-img relative" style={style}>
                                 <img className="w-full" height={280} width={350} src={item.img} alt="blog-clean" />
                                 
                         </div>

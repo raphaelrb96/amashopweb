@@ -12,10 +12,12 @@ import "../Assets/css/global.css";
 import "../Assets/css/pages.css";
 import "../index.scss";
 
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import UserProvider from '../context/userContext';
 import { AppProps } from 'next/app';
+import ThemeProvider from "../theme";
+
 
 
 
@@ -28,25 +30,29 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode,
-  
+
 }) {
 
 
   return (
-      <html>
-        <head>
-          
-          <link rel="icon" href="/favicon.ico" />
-          <meta name="facebook-domain-verification" content="h2rfx1t31eptpcb2tf5m586f0nnkpl" />
-          <meta name="google-site-verification" content="lQ_41-YA1ewDsfnQ_5lQkY1OU57WmnIKmNVPFdOkCAo" />
-          
-        </head>
-        <body>
+    <html>
+      <head>
+
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="facebook-domain-verification" content="h2rfx1t31eptpcb2tf5m586f0nnkpl" />
+        <meta name="google-site-verification" content="lQ_41-YA1ewDsfnQ_5lQkY1OU57WmnIKmNVPFdOkCAo" />
+
+      </head>
+      <body>
+        <ThemeProvider>
           <UserProvider>
+
             {children}
           </UserProvider>
-        </body>
-      </html>
-    
+        </ThemeProvider>
+
+      </body>
+    </html>
+
   )
 }

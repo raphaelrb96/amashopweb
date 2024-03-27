@@ -57,10 +57,10 @@ export const TextoAnimado = (props) => {
     setTimeout(() => {
       let cdWrapper = wordwrapper.current.querySelectorAll(".cd-words-wrapper > .cd-text");
       cdWrapper.forEach(function (item) {
-        maxWidth = item.clientWidth > maxWidth ? item.clientWidth : maxWidth;
+        maxWidth = item.clientWidth;
         maxheight = item.clientHeight > maxheight ? item.clientHeight : maxheight;
       })
-      setMaxLength(maxWidth+10)
+      setMaxLength(maxWidth)
       setMaxHeight(maxheight)
     }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps

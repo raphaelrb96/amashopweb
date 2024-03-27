@@ -5418,6 +5418,11 @@ h6, .heading-6 {
   }
 }
 
+.tab-style-04 .nav-link.active {
+  @apply bg-[#fff] text-[#008C72];
+  border-bottom-color: var(--base-color, #008C72);
+}
+
 .tab-style-05 .nav-item {
   @apply text-[14px] leading-[28px] p-0 inline-block m-0 font-serif font-medium uppercase sm:w-full sm:mb-[5px];
   float: none;
