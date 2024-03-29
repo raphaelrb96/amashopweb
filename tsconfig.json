@@ -23,7 +23,7 @@
       "@/*": ["./src/app/Pages*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/layout.tsx", "src/app/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/layout.tsx", "src/app/page.jsx", "src/*.tsx"],
   "exclude": ["node_modules"]
 }
 

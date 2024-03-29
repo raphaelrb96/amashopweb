@@ -15,7 +15,7 @@ import ShopProductCard from "./Ecommerce/productCard";
 const gridSpacing = 0;
 
 interface GridProdutosProps {
-    lista?: any;
+    lista: [];
     categ?: any;
     pixel?: any;
 
@@ -27,21 +27,21 @@ const GridProdutos = ({ lista, categ, pixel }: GridProdutosProps) => {
     }
 
     return (
-        <Grid container justifyContent="center" className="flex flex-1">
-            {lista.map((doc: any) => {
+        <Grid container justifyContent="start" className="flex flex-1 mb-16">
+            {(lista || []).map((doc: any) => {
                 let dados = doc;
-                const { comissao, id, fotoPrincipal, nome, valor, desc, categoria } = dados;
+                const { comissao, id, fotoPrincipal, path, nome, valor, desc, categoria } = dados;
                 return (
                     <Produto
                         data={dados}
                         key={id}
                         nome={nome}
-                        img={fotoPrincipal}
+                        img={fotoPrincipal || path || '/assets/img/illustrations/produto_2.png'}
                         id={id}
                         desc={desc}
                         categoria={categoria}
                         valor={valor}
-                        btTitle={null} comissao={undefined} click={undefined} />
+                        btTitle={undefined} comissao={undefined} click={undefined} />
                 );
             })}
         </Grid>

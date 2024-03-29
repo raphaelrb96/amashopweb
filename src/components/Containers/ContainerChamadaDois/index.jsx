@@ -17,7 +17,6 @@ import ListaIconeTexto from "../../Listas/ListaIconeTexto";
 import PassoAPassoUm from "../../Listas/ListaEtapas/PassoAPassoUm";
 import ListaSimples from "../../Listas/ListaSimples";
 import { TextoAnimado } from "../../Texto/TextoAnimado";
-import RodapeUm from "../../Rodape/RodapeUm";
 
 const ContainerChamadaDois = (props) => {
 

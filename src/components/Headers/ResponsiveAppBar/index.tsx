@@ -3,7 +3,7 @@ import AppBar, { AppBarProps, AppBarTypeMap } from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
@@ -12,11 +12,26 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import { Link, styled } from '@mui/material';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Categorias', 'Ofertas'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar({position, color, elevation}: AppBarProps) {
+const ColorButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.grey[100]
+}));
+
+const ColorText = styled(Link)<TypographyProps>(({ theme }) => ({
+  color: theme.palette.grey[100]
+}));
+
+const IconeMain = styled('img')(({ theme }) => ({
+  height: 40
+  //backgroundImage: `url(require("/assets/img/logomarca_ama.png"))`
+}));
+
+function ResponsiveAppBar({ position, color, elevation }: AppBarProps) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,38 +52,39 @@ function ResponsiveAppBar({position, color, elevation}: AppBarProps) {
 
   return (
     <AppBar elevation={elevation || 0} color={color || 'transparent'} position={position || 'absolute'}>
-      <Box maxWidth="xl">
+      <Box>
         <Toolbar>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+
+          {/* icone logo inicial */}
+          <ColorText
             variant="h4"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href='/'
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
-          </Typography>
+            <IconeMain src='/assets/img/logomarca_ama.png' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
 
+          </ColorText>
+
+          {/* icone menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+            <ColorButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
             >
-              <MenuIcon />
-            </IconButton>
+              <MenuIcon fontSize='medium' />
+            </ColorButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -94,12 +110,13 @@ function ResponsiveAppBar({position, color, elevation}: AppBarProps) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
+
+          {/* icone logo central */}
+          <ColorText
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href='/'
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -107,53 +124,36 @@ function ResponsiveAppBar({position, color, elevation}: AppBarProps) {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
-          </Typography>
+            <IconeMain src='/assets/img/logomarca_ama.png' sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
+          </ColorText>
+
+          {/* menu fixo */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{  color: 'white', display: 'block' }}
+                sx={{ color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
 
+          {/* icone carrinho */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+            <Tooltip title="Carrinho de Compras">
+              <ColorButton onClick={() => { }} sx={{ p: 0 }}>
+                <ShoppingCartRoundedIcon fontSize='medium' />
+              </ColorButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+
           </Box>
+
         </Toolbar>
       </Box>
     </AppBar>

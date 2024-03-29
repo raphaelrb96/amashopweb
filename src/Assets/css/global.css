@@ -4840,7 +4840,7 @@ h6, .heading-6 {
   @apply text-left inline-flex items-center;
 }
 .shopping-right-left-sidebar .list-style li a:hover {
-  @apply text-fastblue;
+  @apply text-green-600;
 }
 .shopping-right-left-sidebar .list-style li .item-qty {
   @apply text-md absolute top-[1px] right-0 text-right;
@@ -4854,6 +4854,7 @@ h6, .heading-6 {
 .shopping-right-left-sidebar .list-style.filter-color li a:hover .product-cb:after {
   @apply text-[#fff] top-0 left-1 xs:left-[4px];
 }
+.shopping-right-left-sidebar .list-style li a .checked,
 .shopping-right-left-sidebar .list-style li a .product-cb:hover:after,
 .shopping-right-left-sidebar .list-style li a.active .product-cb:after,
 .shopping-right-left-sidebar .list-style li a:hover .product-cb:after {
@@ -4871,6 +4872,8 @@ h6, .heading-6 {
 .shopping-right-left-sidebar .list-style.filter-size li {
   padding: 0 30px;
 }
+
+.shopping-right-left-sidebar .list-style.filter-category.checked,
 .shopping-right-left-sidebar .list-style.filter-category li a .product-cb,
 .shopping-right-left-sidebar .list-style.filter-size li a .product-cb {
   width: 16px;
@@ -4881,6 +4884,7 @@ h6, .heading-6 {
   display: inline-block;
   border: 1px solid #cacaca;
   background-color: #fff;
+  color: #02A676;
   position: relative;
   top: 4px;
 }

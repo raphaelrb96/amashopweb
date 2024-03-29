@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import GridProdutos from '../components/GridProdutos.tsx';
-import { getProdutos } from '../fetchData/getProdutos';
+import { getFeedMain, getProdutos } from '../fetchData/getProdutos';
 import RootLayout from './layout';
 import Home from '../layouts/Home';
 import TesteTres from '../layouts/TesteTres';
@@ -15,6 +15,8 @@ import HeaderTitleEcom from '../components/Texto/HeaderTitleEcom';
 import HeroVideoUm from '../components/Hero/HeroVideoUm';
 import HeroSlideSwipe from '../components/Hero/HeroSlideSwipe';
 import ResponsiveAppBar from '../components/Headers/ResponsiveAppBar';
+import RodapeUm from '../components/Rodape/RodapeUm';
+import CTA from "../components/Button/CTA";
 
 
 
@@ -265,24 +267,49 @@ export const metadata = {
   title: 'Escova Alisadora',
 }
 
-function ContentDinamic({ produtos }) {
+function ContentDinamic({ produtos, colecoes, categorias, filtrar, selected }) {
+
   if (!produtos) {
     return <Pb />;
   }
+
+  const headlineProdutos = selected.id !== -1 ? selected.name : 'Atualizações, Novidades e Lançamentos';
+
   return (
     <>
+
       <Grid item xs={11} lg={10}>
         <CategoriaUm />
       </Grid>
-      <HeaderTitleEcom />
-      <Grid item xs={12} md={3}>
-        <LeftSideMenu />
+
+      <HeaderTitleEcom
+        id={'produtos'}
+        subhead='Produtos e Ofertas'
+        headline={headlineProdutos}
+      />
+
+      <Grid className='order-[0] xs:order-2 sm:order-2' item xs={12} md={3}>
+        <LeftSideMenu
+          categorias={categorias}
+          colecoes={colecoes}
+          filtrar={filtrar}
+          selected={selected}
+        />
+        <Grid justifyContent="center" container>
+          <Grid item xs={8}>
+            <CTA color='inherit' variant='text'>
+              Ver mais
+            </CTA>
+          </Grid>
+        </Grid>
       </Grid>
+
       <Grid item xs={12} md={9}>
         <GridProdutos
           lista={produtos}
         />
       </Grid>
+
     </>
   );
 };
@@ -300,18 +327,44 @@ function ContentFix() {
 
 export default function App() {
 
-  const [produtos, setProdutos] = useState(null);
-  const [pixel, setPixel] = useState(undefined);
+  const [state, setState] = useState({
+    produtos: null,
+    colecoes: null,
+    categorias: null,
+    pixel: null,
+    selected: {
+      name: '',
+      type: 0,
+      id: -1
+    }
+  });
+
+  const { produtos, colecoes, categorias, selected } = state;
 
   useEffect(() => {
 
-    const fetch = async () => {
-      await getProdutos().then((prods) => {
-        if (prods) {
 
-          console.log(prods.length);
-          setProdutos(prods);
-        }
+    const fetch = async () => {
+      //const limite = 20;
+      // await getProdutos(limite).then((prods) => {
+      //   if (prods) {
+
+      //     console.log(prods.length);
+      //     setProdutos(prods);
+      //   }
+      // });
+
+      await getFeedMain().then(result => {
+        const produtos = result?.produtosNovos || [];
+        const categorias = result?.categorias || [];
+        const colecoes = result?.colecoes || [];
+
+        setState((prev) => ({
+          ...prev,
+          produtos,
+          categorias,
+          colecoes
+        }));
       });
     }
 
@@ -320,6 +373,23 @@ export default function App() {
 
   }, []);
 
+  const filtrar = (prods, id, name, type) => {
+    console.log(prods)
+    setState((prev) => ({
+      ...prev,
+      produtos: prods,
+      selected: {
+        id,
+        name,
+        type
+      }
+    }));
+
+    document?.getElementById('produtos').scrollIntoView({
+      behavior: 'smooth'
+    });
+
+  };
 
   // return (
   //   <RootLayout>
@@ -328,12 +398,20 @@ export default function App() {
   // );
 
 
+
   return (
     <RootLayout>
       <Grid justifyContent="center" spacing={1} container>
         <ResponsiveAppBar />
         <ContentFix />
-        <ContentDinamic produtos={produtos} />
+        <ContentDinamic
+          categorias={categorias}
+          colecoes={colecoes}
+          produtos={produtos}
+          selected={selected}
+          filtrar={filtrar}
+        />
+        <RodapeUm dark />
       </Grid>
     </RootLayout>
   )

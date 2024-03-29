@@ -1,25 +1,33 @@
-import { collection, getDocs, getFirestore, initializeFirestore, limit, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, getFirestore, initializeFirestore, limit, orderBy, query } from "firebase/firestore";
 import { createFirebaseApp } from "../firebase/clienteApp";
+const db = initializeFirestore(createFirebaseApp(), {
+  experimentalForceLongPolling: true,
+});
 
-export const getProdutos = async () => {
-  
-    const db = initializeFirestore(createFirebaseApp(),{
-      experimentalForceLongPolling: true,
-    })
-    const profileCollection = collection(db, 'Produtos');
-    const q = query(profileCollection, orderBy("dataCadastro", "desc"), limit(200));
+export const getProdutos = async (limite) => {
 
-    const querySnapshot = await getDocs(q);
-  
-    if (querySnapshot.empty) {
-      return null
-    }
-  
-    let list = [];
+  const profileCollection = collection(db, 'Produtos');
+  const q = query(profileCollection, orderBy("dataCadastro", "desc"), limit(limite || 200));
 
-    querySnapshot.forEach(docSnap => {
-        list.push(docSnap.data());
-    });
-  
-    return list;
+  const querySnapshot = await getDocs(q);
+
+  if (querySnapshot.empty) {
+    return null
   }
+
+  let list = [];
+
+  querySnapshot.forEach(docSnap => {
+    list.push(docSnap.data());
+  });
+
+  return list;
+};
+
+export const getFeedMain = async () => {
+  const feedCollection = collection(db, 'Feeds');
+  const feedMainRef = doc(feedCollection, 'FeedPrincipal');
+  const snapshot = await getDoc(feedMainRef);
+  const result = snapshot.data();
+  return result;
+};

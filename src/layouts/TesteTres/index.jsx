@@ -18,7 +18,7 @@ import ContainerQuemSomos from "../../components/Containers/ContainerQuemSomos/i
 import CopyText from "../../components/Copywriting/CopyText/index.jsx";
 import ContainerChamadaDois from "../../components/Containers/ContainerChamadaDois/index.jsx";
 import Topo from "../../components/Topo/index.jsx";
-import RodapeUm from "../../components/Rodape/RodapeUm/index.jsx";
+import RodapeUm from "../../components/Rodape/RodapeUm";
 import { memo, useLayoutEffect } from 'react';
 import TextCopy from '../../components/Texto/TextCopy/index.jsx';
 import { useRouter } from 'next/navigation';
@@ -159,7 +159,7 @@ function TesteTres({ object }) {
                 />
 
                 <RodapeUm
-
+                    spacingBottom
                 />
 
             </Grid>
