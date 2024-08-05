@@ -44,7 +44,7 @@ const index = ({ data }) => {
                         return (
                             <SwiperSlide key={i} style={{
                                 backgroundImage: `url(${item.img})`,
-                            }} className="bg-no-repeat	bg-cover	overflow-hidden bg-center">
+                            }} className="bg-no-repeat	bg-cover bg-center">
                                 <Box className="absolute h-full w-full bg-black opacity-60" />
                                 <Box className="h-full  text-center justify-center xs:p-0">
                                     <Row className="h-full w-[70%] my-0 mx-auto">

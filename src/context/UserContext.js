@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import { createFirebaseApp } from '../firebase/clienteApp'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signInAnonymously } from 'firebase/auth'
 
 export const UserContext = createContext()
 
@@ -10,8 +10,15 @@ export default function UserContextComp({ children }) {
 
   useEffect(() => {
     // Listen authenticated user
-    const app = createFirebaseApp()
-    const auth = getAuth(app)
+    const app = createFirebaseApp();
+    const auth = getAuth(app);
+
+    const loginAnonimous = async () => {
+      await signInAnonymously(auth).then(() => {
+        //console.log('autenticacao Anonima');
+      });
+    };
+
     const unsubscriber = onAuthStateChanged(auth, async (user) => {
       try {
         if (user) {
@@ -20,17 +27,24 @@ export default function UserContextComp({ children }) {
           // You could also look for the user doc in your Firestore (if you have one):
           // const userDoc = await firebase.firestore().doc(`users/${uid}`).get()
           setUser({ uid, displayName, email, photoURL })
-        } else setUser(null)
+        } else setUser(null);
       } catch (error) {
         // Most probably a connection error. Handle appropriately.
+        //console.log('Erro na autenticacao');
       } finally {
-        setLoadingUser(false)
+        //console.log('autenticacao finally');
+        if(!user) {
+          //console.log('autenticacao concluida com user null');
+          await loginAnonimous();
+        }
+        setLoadingUser(false);
       }
     })
 
+    //console.log('Iniciando a autenticacao');
     // Unsubscribe auth listener on unmount
-    return unsubscriber
-  }, [])
+    return () => unsubscriber();
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser, loadingUser }}>

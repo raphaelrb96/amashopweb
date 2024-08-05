@@ -33,7 +33,7 @@ const GridProdutos = ({ lista, categ, pixel }: GridProdutosProps) => {
                 const { comissao, id, fotoPrincipal, path, nome, valor, desc, categoria } = dados;
                 return (
                     <Produto
-                        data={dados}
+                        data={doc}
                         key={id}
                         nome={nome}
                         img={fotoPrincipal || path || '/assets/img/illustrations/produto_2.png'}

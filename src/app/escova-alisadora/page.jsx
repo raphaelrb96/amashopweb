@@ -13,6 +13,10 @@ const obj = {
   produto: {
     urlVideo: '',
     img: '',
+    name: 'Escova Alisadora',
+    id: '148541183',
+    linkCheckout: 'https://seguro.amashops.com.br/r/QPFD16X4IR',
+    linkWhatsapp: 'https://api.whatsapp.com/send?phone=5592981414741&text=Informa%C3%A7%C3%B5es%20sobre%20a%20Escova%20Alisadora',
     subhead: 'Resultados Profissionais em Casa',
     btn: 'Comprar Agora',
     headline: 'Tenha resultados de salão sem sair de casa, economizando tempo e dinheiro.',
@@ -273,7 +277,7 @@ export default function EscovaPage() {
 
 
   return (
-    <RootLayout>
+    <>
 
 
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-RM7L7MGJF9" />
@@ -320,11 +324,11 @@ export default function EscovaPage() {
       <TesteTres object={obj} />
 
 
-    </RootLayout>
+    </>
   );
 
   return (
-    <RootLayout>
+    <>
       <main>
 
         <GridProdutos
@@ -333,6 +337,6 @@ export default function EscovaPage() {
         />
 
       </main>
-    </RootLayout>
+    </>
   )
 }

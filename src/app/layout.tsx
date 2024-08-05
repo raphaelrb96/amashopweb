@@ -28,25 +28,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  className
 }: {
   children: React.ReactNode,
-
+  className?: any
 }) {
 
 
   return (
     <html>
       <head>
-
+        
         <link rel="icon" href="/favicon.ico" />
+        <title>Amashop</title>
+        <meta name="description" content="Site de varejo online"></meta>
         <meta name="facebook-domain-verification" content="h2rfx1t31eptpcb2tf5m586f0nnkpl" />
         <meta name="google-site-verification" content="lQ_41-YA1ewDsfnQ_5lQkY1OU57WmnIKmNVPFdOkCAo" />
-
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className={`${className} h-full min-h-screen `}>
         <ThemeProvider>
           <UserProvider>
-
             {children}
           </UserProvider>
         </ThemeProvider>

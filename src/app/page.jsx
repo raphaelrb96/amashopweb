@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import GridProdutos from '../components/GridProdutos.tsx';
 import { getFeedMain, getProdutos } from '../fetchData/getProdutos';
 import RootLayout from './layout';
@@ -17,6 +17,8 @@ import HeroSlideSwipe from '../components/Hero/HeroSlideSwipe';
 import ResponsiveAppBar from '../components/Headers/ResponsiveAppBar';
 import RodapeUm from '../components/Rodape/RodapeUm';
 import CTA from "../components/Button/CTA";
+import { usePathname, useRouter, useSearchParams } from 'next/navigation.js';
+import { useUser } from '../context/userContext.js';
 
 
 
@@ -267,7 +269,7 @@ export const metadata = {
   title: 'Escova Alisadora',
 }
 
-function ContentDinamic({ produtos, colecoes, categorias, filtrar, selected }) {
+function ContentDinamic({ produtos, colecoes, categorias, filtrar, selected, navCateg }) {
 
   if (!produtos) {
     return <Pb />;
@@ -279,7 +281,9 @@ function ContentDinamic({ produtos, colecoes, categorias, filtrar, selected }) {
     <>
 
       <Grid item xs={11} lg={10}>
-        <CategoriaUm />
+        <CategoriaUm
+          navCateg={navCateg}
+        />
       </Grid>
 
       <HeaderTitleEcom
@@ -318,7 +322,7 @@ function ContentFix() {
   return (
     <>
       <HeroSlideSwipe />
-      <Grid item xs={12} lg={10}>
+      <Grid item xs={12}>
         <ContainerInfoEcom />
       </Grid>
     </>
@@ -326,6 +330,11 @@ function ContentFix() {
 }
 
 export default function App() {
+
+  const routerPath = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { user } = useUser();
 
   const [state, setState] = useState({
     produtos: null,
@@ -340,6 +349,33 @@ export default function App() {
   });
 
   const { produtos, colecoes, categorias, selected } = state;
+
+  const getParamsCategoria = () => {
+    if (!searchParams.has('categoria')) {
+
+      return undefined;
+    }
+
+    const idFinal = searchParams.get('categoria');
+    return idFinal;
+  };
+
+  const getListCategoria = (cat) => {
+    let obj = {
+      id: -1,
+      name: 'Nenhum Resultado',
+      recentes: []
+    };
+    categorias.map(item => {
+      const { id, itens, name, recentes } = item;
+      console.log(recentes)
+      if (id == cat) {
+        obj = item;
+        return;
+      }
+    });
+    return obj;
+  };
 
   useEffect(() => {
 
@@ -373,8 +409,19 @@ export default function App() {
 
   }, []);
 
+  useEffect(() => {
+
+    const categ = getParamsCategoria();
+    if (!categ) return;
+    if (!categorias || categorias.length === 0) return;
+    const { id, name, recentes } = getListCategoria(categ);
+    filtrar(recentes, id, name, 0);
+
+  }, [categorias]);
+
+
   const filtrar = (prods, id, name, type) => {
-    console.log(prods)
+    console.log(type)
     setState((prev) => ({
       ...prev,
       produtos: prods,
@@ -385,10 +432,23 @@ export default function App() {
       }
     }));
 
+    if (type === 0) {
+      window?.history.pushState({ categoria: id }, null, '/?categoria=' + id);
+    }
+
+
     document?.getElementById('produtos').scrollIntoView({
       behavior: 'smooth'
     });
 
+  };
+
+  const navigationCateg = (categ) => {
+    const { id, name, recentes } = getListCategoria(categ);
+    //router.replace('?categoria=' + categ);
+    //window?.history.pushState({categoria: categ}, null, '/?categoria=' + categ);
+    //window?.location.replace('/?categoria=' + categ);
+    filtrar(recentes, id, name, 0);
   };
 
   // return (
@@ -400,7 +460,7 @@ export default function App() {
 
 
   return (
-    <RootLayout>
+    <>
       <Grid justifyContent="center" spacing={1} container>
         <ResponsiveAppBar />
         <ContentFix />
@@ -410,9 +470,10 @@ export default function App() {
           produtos={produtos}
           selected={selected}
           filtrar={filtrar}
+          navCateg={navigationCateg}
         />
         <RodapeUm dark />
       </Grid>
-    </RootLayout>
+    </>
   )
 }

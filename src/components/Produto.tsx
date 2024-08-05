@@ -1,8 +1,9 @@
 import { SignalCellularNullRounded } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Stack, Typography } from "@mui/material";
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { styled } from '@mui/material/styles';
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import { useCallback } from "react";
 
 interface ProdutoItemProps {
     img: string;
@@ -55,8 +56,12 @@ const CTA = styled(Button)`
 `;
 
 const Nome = styled(Typography)`
-    line-height: 16px;
-    height: 32px;
+    display: block;/* or inline-block */
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 3.6em;
+    line-height: 1.8em;
     ${props => props.theme.breakpoints.up("sm")} {
         margin-bottom: 16px;
     }
@@ -78,8 +83,18 @@ const StackRating = styled(Stack)`
     }
 `;
 
+
+
 const Produto = ({ img, nome, valor, comissao, id, desc, categoria, btTitle, click, data, rating }: ProdutoItemProps) => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const createQueryString = useCallback((name: string, value: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set(name, value);
+
+        return params.toString();
+    }, [searchParams]);
 
 
     const formatNome = () => {
@@ -113,9 +128,11 @@ const Produto = ({ img, nome, valor, comissao, id, desc, categoria, btTitle, cli
                 elevation={1}
                 onClick={() => {
 
-                    console.log(JSON.stringify(data));
+                    //const idFinal = decodeURI(id);
+                    //const foto = img.split('/').slice(2).join('/');
+                    //console.log(JSON.stringify(foto));
 
-                    router.push(`/loja/${id}`);
+                    router.push(`/produto?${createQueryString('id', id)}`);
 
                     // router.push({
                     //     pathname: '/loja/' + id,
@@ -136,18 +153,21 @@ const Produto = ({ img, nome, valor, comissao, id, desc, categoria, btTitle, cli
                                 sx={{ display: { xs: "none", md: "flex" } }}
                             />
                         }
-                        <Stack
-                            direction="row"
-                            alignItems="center"
-                            sx={{
-                                display: { xs: "flex", md: "none" },
-                                svg: {
-                                    color: "warning.main",
-                                    width: 22,
-                                },
-                            }}>
-                            <StarRoundedIcon /> <span>{0}</span>
-                        </Stack>
+                        {
+                            rating && <Stack
+                                direction="row"
+                                alignItems="center"
+                                sx={{
+                                    display: { xs: "flex", md: "none" },
+                                    svg: {
+                                        color: "warning.main",
+                                        width: 22,
+                                    },
+                                }}>
+                                <StarRoundedIcon /> <span>{0}</span>
+                            </Stack>
+                        }
+
                     </StackRating>
 
                     {
@@ -160,7 +180,7 @@ const Produto = ({ img, nome, valor, comissao, id, desc, categoria, btTitle, cli
                     }
 
                     <Nome variant="body1" lineHeight={1.2}>
-                        {formatNome()}
+                        {nome}
                     </Nome>
 
                     <CTA variant='outlined'>

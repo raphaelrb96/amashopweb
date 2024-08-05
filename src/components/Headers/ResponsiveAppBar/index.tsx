@@ -14,12 +14,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import { Link, styled } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation'
 
-const pages = ['Categorias', 'Ofertas'];
+const pages = ['Baixar Aplicativo'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ColorButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.grey[100]
+  color: theme.palette.grey[100],
+  marginLeft: -6
 }));
 
 const ColorText = styled(Link)<TypographyProps>(({ theme }) => ({
@@ -32,6 +35,9 @@ const IconeMain = styled('img')(({ theme }) => ({
 }));
 
 function ResponsiveAppBar({ position, color, elevation }: AppBarProps) {
+
+  const router = useRouter();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -48,6 +54,14 @@ function ResponsiveAppBar({ position, color, elevation }: AppBarProps) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const clickMenu = (page: string) => {
+    switch(page) {
+      case 'Baixar Aplicativo':
+        router.push('https://play.google.com/store/apps/details?id=com.amashopping')
+        break;
+    }
   };
 
   return (
@@ -104,7 +118,7 @@ function ResponsiveAppBar({ position, color, elevation }: AppBarProps) {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => clickMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -136,7 +150,7 @@ function ResponsiveAppBar({ position, color, elevation }: AppBarProps) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => clickMenu(page)}
                 sx={{ color: 'white', display: 'block' }}
               >
                 {page}
@@ -147,7 +161,7 @@ function ResponsiveAppBar({ position, color, elevation }: AppBarProps) {
           {/* icone carrinho */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Carrinho de Compras">
-              <ColorButton onClick={() => { }} sx={{ p: 0 }}>
+              <ColorButton onClick={() => router.push('/carrinho')} sx={{ p: 0 }}>
                 <ShoppingCartRoundedIcon fontSize='medium' />
               </ColorButton>
             </Tooltip>

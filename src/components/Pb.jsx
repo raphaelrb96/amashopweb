@@ -7,7 +7,8 @@ const Pb = () => {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                margin: 40
+                padding: 40,
+                height: '100%'
             }}
             justifyContent="center"
             alignContent="center"

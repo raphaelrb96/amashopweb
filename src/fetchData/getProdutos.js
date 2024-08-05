@@ -1,8 +1,5 @@
 import { collection, doc, getDoc, getDocs, getFirestore, initializeFirestore, limit, orderBy, query } from "firebase/firestore";
-import { createFirebaseApp } from "../firebase/clienteApp";
-const db = initializeFirestore(createFirebaseApp(), {
-  experimentalForceLongPolling: true,
-});
+import { db } from '../firebase/firedb';
 
 export const getProdutos = async (limite) => {
 

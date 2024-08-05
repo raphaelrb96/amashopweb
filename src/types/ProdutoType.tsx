@@ -1,6 +1,6 @@
 import { DocumentData } from "firebase/firestore";
 
-export interface ProdutoType {
+export interface ProdutoType extends DocumentData {
     //atributos
     
     //string
@@ -75,7 +75,7 @@ export interface ProdutoType {
     cashback: number;
 
     //array
-    colecoes: [];
+    colecoes: number[];
 
     //array
     palavrasChave: [];

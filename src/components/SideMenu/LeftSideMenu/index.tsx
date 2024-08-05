@@ -36,8 +36,8 @@ const LeftSideMenu = ({ categorias, colecoes, selected, filtrar }: SideMenuProps
                             const { id, itens, name, recentes } = data;
                             const styleCheck = (selected.id === id && selected.type === 0) ? { backgroundColor: "#02A676" } : undefined;
                             return (
-                                <li>
-                                    <a aria-label="product-category" rel="noreferrer" onClick={(e) => changeFilter(recentes, id, name, 0, e)} href="#shirt">
+                                <li key={id}>
+                                    <a aria-label="product-category" rel="noreferrer" href='#' onClick={(e) => changeFilter(recentes, id, name, 0, e)}>
                                         <span className="product-cb product-category-cb checked" style={styleCheck}></span>
                                         {name}
                                     </a>
@@ -59,8 +59,8 @@ const LeftSideMenu = ({ categorias, colecoes, selected, filtrar }: SideMenuProps
                             const { id, itens, name, recentes } = data;
                             const styleCheck = (selected.id === id && selected.type === 1) ? { backgroundColor: "#02A676" } : undefined;
                             return (
-                                <li>
-                                    <a aria-label="product-category" rel="noreferrer" onClick={(e) => changeFilter(recentes, id, name, 1, e)} href="#shirt">
+                                <li key={id}>
+                                    <a aria-label="product-category" rel="noreferrer" onClick={(e) => changeFilter(recentes, id, name, 1, e)} href="#">
                                         <span className="product-cb product-category-cb checked" style={styleCheck}></span>
                                         {name}
                                     </a>

@@ -23,7 +23,7 @@
   }
 
   .shop-color li > input[type="radio"] + label span {
-    @apply h-[32px] w-[32px] rounded-full inline-block;
+    @apply h-[32px] w-[32px] rounded-full inline-block mt-2;
   }
 
   input[type="radio"] + label span {

@@ -34,15 +34,15 @@ const PRIMARY: any = {
   contrastText: "#fff",
 };
 const SECONDARY: any = {
-  light: "#7200CC",
-  main: "#3F0071",
-  dark: "#34005C",
+  light: "#008C72",
+  main: "#007369",
+  dark: "#003840",
   contrastText: "#fff",
 };
 const INFO: any = {
-  light: "#74CAFF",
-  main: "#1890FF",
-  dark: "#0C53B7",
+  light: "#DFE3E8",
+  main: "#919EAB",
+  dark: "#637381",
   contrastText: "#fff",
 };
 const SUCCESS: any = {
@@ -109,7 +109,7 @@ const palette = {
     ...COMMON,
     divider: GREY[400],
     text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-    background: { paper: "#fff", default: "#F9FAFB" },
+    background: { paper: "#fff", default: "#F4F6F8" },
     action: { active: GREY[600], ...COMMON.action },
   },
   dark: {

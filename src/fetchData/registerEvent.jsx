@@ -1,6 +1,6 @@
 import { getApp } from "firebase/app";
 import { collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
-import { createFirebaseApp } from "../firebase/clienteApp";
+import { db } from '../firebase/firedb';
 
 
 function criarNovoEvento(idEvento, tipo, conteudo, titulo, nomeUser, userId, dataId, dataNome, dataFoto) {
@@ -23,7 +23,6 @@ function criarNovoEvento(idEvento, tipo, conteudo, titulo, nomeUser, userId, dat
 }
 
 export const registerEvent = async (tipo, conteudo, titulo, dataId) => {
-    const db = getFirestore(createFirebaseApp());
     const feedCollection = collection(db, 'Eventos')
     const documento = doc(feedCollection);
     const idDoc = documento.id;

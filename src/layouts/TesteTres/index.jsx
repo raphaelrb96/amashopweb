@@ -17,7 +17,7 @@ import ContainerChamadaUm from "../../components/Containers/ContainerChamadaUm/i
 import ContainerQuemSomos from "../../components/Containers/ContainerQuemSomos/index.jsx";
 import CopyText from "../../components/Copywriting/CopyText/index.jsx";
 import ContainerChamadaDois from "../../components/Containers/ContainerChamadaDois/index.jsx";
-import Topo from "../../components/Topo/index.jsx";
+import Topo from "../../components/Topo/index.tsx";
 import RodapeUm from "../../components/Rodape/RodapeUm";
 import { memo, useLayoutEffect } from 'react';
 import TextCopy from '../../components/Texto/TextCopy/index.jsx';
@@ -33,6 +33,8 @@ function TesteTres({ object }) {
     const router = useRouter();
 
     const chamadaDois = object.ctaExtra;
+
+    const { name, id, linkCheckout, linkWhatsapp } = object.produto;
 
     const clickAddCart = () => {
         if (!DEBUG) {
@@ -53,17 +55,19 @@ function TesteTres({ object }) {
                 currency: "brl",
                 value: 1,
                 items: [
-                    { item_id: '148541183', item_name: 'Escova Alisadora' }
+                    { item_id: id, item_name: name }
                 ]
             });
 
             window?.fbq('track', 'AddToCart', {
-                content_ids: ['148541183'],
+                content_ids: [id],
                 content_type: 'product'
             });
         }
 
-        window?.location.assign('https://seguro.amashops.com.br/r/QPFD16X4IR');
+        if(linkCheckout === '') return;
+
+        window?.location.assign(linkCheckout);
 
 
 
@@ -97,7 +101,9 @@ function TesteTres({ object }) {
 
         window?.fbq('track', 'Contact');
 
-        window?.open('https://api.whatsapp.com/send?phone=5592981414741&text=Informa%C3%A7%C3%B5es%20sobre%20a%20Escova%20Alisadora');
+        if(linkWhatsapp === '') return;
+
+        window?.open(linkWhatsapp);
 
     }
 
@@ -109,7 +115,7 @@ function TesteTres({ object }) {
 
             <Grid className='bg-[#011F26] relative' justifyContent="center" alignItems={'center'} container>
 
-                <Topo title={'ENTREGA RÁPIDA PARA MANAUS E REGIÃO NORTE'} />
+                <Topo title={'PAGAMENTO SOMENTE NA ENTREGA'} />
 
                 <Grid item sm={12}>
                     <HeroTres
