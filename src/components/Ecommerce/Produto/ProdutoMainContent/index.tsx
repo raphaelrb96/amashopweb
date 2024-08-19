@@ -81,6 +81,7 @@ const ProdutoMainContent = ({ produto, itemCart, setItemCart, processCart, setPr
         e.preventDefault();
         if(processCart) return;
         setProcessCart(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
         addToCart(user.uid, itemCart, (sucess) => {
             //setProcessCart(false);
@@ -143,12 +144,12 @@ const ProdutoMainContent = ({ produto, itemCart, setItemCart, processCart, setPr
     const tms = produto?.tamanhos?.length > 0 ? produto.tamanhos : null;
     const modelos = mds || crs || tms || null;
     const swiperData = produto?.fotos || [];
-    const valor = Number(produto?.valor || 0);
+    const valor = Number(String(produto?.valor).replace(/\s/g, '') || 0);
     const valorAntigo = Number((0.35 * valor) + valor);
     const valorString = `R$ ${valor.toFixed(2)}`;
     const valorAntigoString = `R$ ${valorAntigo.toFixed(2)}`;
 
-    //console.log(modelos)
+    console.log('Valor: ', valor, produto.valor)
 
     return (
         <section className="py-[100px] lg:py-[70px] md:py-[55px] sm:py-[30px] xs:py-[15px] single-product">

@@ -42,7 +42,7 @@ const ListData = [
 interface PropsProdutoMainContent {
     produto: ProdutoType | undefined | null;
     itemCart?: ItemCart | undefined | null;
-    processCart: boolean;
+    processCart?: boolean;
     setItemCart?: React.Dispatch<any>;
 };
 

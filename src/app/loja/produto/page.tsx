@@ -55,6 +55,8 @@ const Index = () => {
 
     const [produto, setProduto] = useState<ProdutoType | any | null>(undefined);
     const [itemCart, setItemCart] = useState<ItemCart | any>(undefined);
+    const [processCart, setProcessCart] = useState(false);
+
 
     const formatIdUrl = useCallback(() => {
         //const paramns = routerPath.split("/");
@@ -117,6 +119,8 @@ const Index = () => {
                     produto={produto}
                     setItemCart={setItemCart}
                     itemCart={itemCart}
+                    processCart={processCart}
+                    setProcessCart={setProcessCart}
                 />
                 <ProdutoTabDetalhes
                     produto={produto}

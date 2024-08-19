@@ -27,6 +27,7 @@ export interface CompraObj extends DocumentData {
     endereco: EnderecoCompra;
     nomeCliente: string;
     contatoCliente: string;
+    email: string;
     hora: number;
     id: string;
     status: number;

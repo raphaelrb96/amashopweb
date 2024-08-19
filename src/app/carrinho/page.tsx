@@ -16,7 +16,24 @@ import { getCartList } from '../../fetchData/cartServices';
 import { DocumentData } from 'firebase/firestore';
 import RodapeCheckout from '../../components/Rodape/RodapeCheckout';
 import Topo from '../../components/Topo';
+import { CompraObj } from '../../types/CompraObj';
+import { registerOrder } from '../../fetchData/orderServices';
 
+
+interface FormValues {
+  name: string;
+  email: string;
+  phone: string;
+  street: string;
+  number: string;
+  district: string;
+  postalCode: string;
+  city: string;
+  state: string;
+  country: string;
+  paymentMethod: string;
+  observations: string;
+}
 
 // Definindo a interface para os itens do carrinho
 interface CartItem {
@@ -83,7 +100,7 @@ const Headline = styled(Typography)`
   margin-bottom: 40px;
 `;
 
-let itemCompraNovo = (produto: ProdutoType | DocumentData | any): ItemCart => {
+const itemCompraNovo = (produto: ProdutoType | DocumentData | any): ItemCart => {
 
   let prd = {
     loja: produto.loja,
@@ -109,20 +126,128 @@ let itemCompraNovo = (produto: ProdutoType | DocumentData | any): ItemCart => {
   return prd;
 };
 
+const novoPedido = (values: FormValues, list: ItemCart[] | undefined | null, uid: string): CompraObj | null => {
+
+  if (!list) return null;
+
+  let taxaEntrega = 10;
+  let subtotal = 0;
+  let comissaoTotal = 0;
+  let cashbackTotal = 0;
+
+  list.map(item => {
+
+    const { valor, quantidade, comissao, cashback } = item;
+
+    let itemTotal = (quantidade * valor);
+    let itemComissaoTotal = (quantidade * comissao);
+    let itemCashback = (quantidade * cashback);
+    subtotal = subtotal + itemTotal;
+    comissaoTotal = comissaoTotal + itemComissaoTotal;
+    cashbackTotal = cashbackTotal + itemCashback;
+
+  });
+
+  let formPag = 3;
+  switch (values.paymentMethod) {
+    case 'pix':
+      formPag = 6;
+      break;
+    case 'dinheiro':
+      formPag = 2;
+      break;
+    default:
+      formPag = 3;
+      break;
+  }
+
+
+  return {
+    endereco: {
+      rua: values.street,
+      numero: values.number,
+      bairro: values.district,
+      cep: values.postalCode,
+      cidade: values.city,
+      estado: values.state,
+      pais: values.country,
+      complemento: ''
+    },
+    nomeCliente: values.name,
+    contatoCliente: values.phone,
+    email: values.email,
+
+    //dados de padroes
+    hora: Date.now(),
+    id: '',
+    status: 1,
+
+    //itens e somas da compra
+    itensCompra: list,
+    comissao: Number(comissaoTotal),
+    cashback: Number(cashbackTotal),
+    subtotal: Number(subtotal),
+    total: Number(subtotal + taxaEntrega),
+
+    //taxas variaveis
+    taxaEntrega: taxaEntrega,
+    taxaParcelamento: 0,
+
+    //dados de pagamento da compra
+    formaDePagamento: formPag,
+    pagamentoOnline: false,
+    parcelamento: {
+      numero: 1,
+      descricao: ''
+    },
+    statusPagamento: 0,
+
+    //dados do vendedor
+    uidVendedor: '',
+    nomeVendedor: '',
+    apelidoVendedor: '',
+    comissaoPaga: false,
+
+    //dados do cliente
+    uidCliente: uid,
+    pagamento: {
+      charges: [],
+      status: '',
+      hora: 0,
+    }
+  };
+
+};
+
 const CheckoutScreen: React.FC = () => {
 
   const routerPath = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { user, loadingUser } = useUser();
+  const { user, loadingUser, getUidUserWithEmailAuth } = useUser();
 
   const [activeStep, setActiveStep] = useState<number>(0);
   const [produto, setProduto] = useState<ProdutoType | any | null>(undefined);
   const [itensCart, setItensCart] = useState<ItemCart[] | undefined | null>(undefined);
-
+  const [loadFinish, setLoadFinish] = useState<boolean>(false);
 
   const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
+  const concluirPedido = async (value: FormValues) => {
+    if (loadFinish) return;
+    setLoadFinish(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const { email, name, phone } = value;
+    const uidUserAuth = await getUidUserWithEmailAuth(email, name, phone);
+    const isCart = !Boolean(produto);
+    const objOrder = novoPedido(value, itensCart, uidUserAuth);
+    if (!objOrder) return;
+    const sucessRegister = await registerOrder(objOrder, isCart, user.uid);
+    if (sucessRegister) {
+      router.replace('/compra-confirmada');
+    }
+  };
 
 
   useEffect(() => {
@@ -186,7 +311,7 @@ const CheckoutScreen: React.FC = () => {
 
   }, [searchParams, router, user]);
 
-  if (produto === undefined && itensCart === undefined) return (
+  if ((produto === undefined && itensCart === undefined) || loadFinish) return (
     <Box
       className="py-6 h-full flex flex-col w-full min-h-screen"
       justifyContent="center"
@@ -197,7 +322,7 @@ const CheckoutScreen: React.FC = () => {
 
   if (produto === null && itensCart === null) return (
     <Box className='h-full flex flex-col w-full min-h-screen'>
-      <ResponsiveAppBar position="sticky" color="primary" />
+      <ResponsiveAppBar elevation={12} position="sticky" color="primary" />
       <Container maxWidth="xl">
         <Box
           className="py-6 flex h-full flex-col"
@@ -213,12 +338,9 @@ const CheckoutScreen: React.FC = () => {
 
   );
 
-  console.log(produto, itensCart);
-
-
   return (
     <Box className='h-full flex flex-col min-h-screen'>
-      {!produto && <ResponsiveAppBar position="sticky" color="primary" />}
+      {!produto && <ResponsiveAppBar elevation={12} position="sticky" color="primary" />}
       {produto && <Topo dark title={'GARANTIA DE SEGURANÇA E SATISFAÇÃO'} />}
       <Box className='flex justify-center'>
         <ContainerGrid spacing={0} container maxWidth="xl">
@@ -232,6 +354,7 @@ const CheckoutScreen: React.FC = () => {
             user={user}
           />
           <CheckoutUm
+            finishOrder={concluirPedido}
           />
         </ContainerGrid>
       </Box>

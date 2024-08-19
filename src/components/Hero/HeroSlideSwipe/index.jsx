@@ -28,7 +28,7 @@ const index = ({ data }) => {
     const hidden = true;
 
     return (
-        <section className="overflow-hidden lg:h-[102vh] xl:h-[102vh] md:h-[102vh] sm:h-[500px]">
+        <section className="overflow-hidden h-[102vh] XS:h-[500px] sm:h-[500px]">
             <Swiper
                 className="swiper-pagination-light swiper-pagination-medium h-full relative swiper-navigation-04 swiper-navigation-dark travel-agency-slider"
                 slidesPerView={1}
@@ -37,7 +37,7 @@ const index = ({ data }) => {
                 navigation={true}
                 modules={[Pagination, Autoplay, Keyboard, Navigation]}
                 pagination={{ clickable: true }}
-                autoplay={{ delay: 4500, disableOnInteraction: false }}
+                autoplay={{ delay: 3500, disableOnInteraction: true }}
             >
                 {
                     (data || SwiperSlideData).map((item, i) => {

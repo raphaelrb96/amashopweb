@@ -1,8 +1,8 @@
-import React from 'react';
-import { Col, Collapse, Container, Navbar, Row } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Col, Collapse, Navbar, Row } from 'react-bootstrap'
 import Buttons from '../../Button/Buttons';
 import Link from 'next/link';
-import { Button, Grid, styled } from '@mui/material';
+import { Box, Button, Grid, Typography, styled } from '@mui/material';
 import { ProdutoType } from '../../../types/ProdutoType';
 import { ItemCart } from '../../../types/ItemCart';
 import { cleanCart, deleteItemCart, updateItemCart } from '../../../fetchData/cartServices';
@@ -65,6 +65,43 @@ const ThumbContainer = styled("td")`
   }
 `;
 
+const Container = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  //padding: theme.spacing(3),
+  borderRadius: theme.shape.borderRadius,
+  //boxShadow: theme.shadows[3],
+  marginTop: theme.spacing(1),
+  //border: `1px solid ${theme.palette.grey[300]}`,
+}));
+
+const Header = styled(Typography)(({ theme }) => ({
+  fontSize: '18px',
+  fontWeight: 'bold',
+  marginBottom: theme.spacing(2),
+  color: theme.palette.primary.main,
+}));
+
+const BoxRow = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: theme.spacing(1),
+}));
+
+const Amount = styled(Typography)(({ theme }) => ({
+  fontWeight: 'bold',
+  color: theme.palette.text.primary,
+}));
+
+const Footer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginTop: theme.spacing(2),
+  paddingBottom: theme.spacing(3),
+  borderBottom: `1px solid ${theme.palette.grey[300]}`,
+}));
+
 interface PropsCarrinhoContent {
   produto: ProdutoType | undefined | null;
   itens: ItemCart[] | undefined | null;
@@ -74,11 +111,21 @@ interface PropsCarrinhoContent {
 
 const CarrinhoDois = ({ produto, itens, setItensCart, user }: PropsCarrinhoContent) => {
 
+
+  const [cupom, setCupom] = useState<number>(0);
+
   const list = itens;
 
   if (!list) {
     return null;
   }
+
+  let taxaEntrega = 10;
+  let subtotal = 0;
+  itens.map((item, i) => {
+    const subtotalItem = item.valor * item.quantidade;
+    subtotal = subtotal + subtotalItem;
+  });
 
   const limparCarrinho = () => {
     if (produto) return;
@@ -116,8 +163,9 @@ const CarrinhoDois = ({ produto, itens, setItensCart, user }: PropsCarrinhoConte
   return (
     <CheckoutContainer item xs={12} sm={8} md={6} lg={7} className="px-[70px] pt-[50px]  lg:px-[40px] md:px-[25px]">
       <Row className='flex justify-center content-center items-end'>
-        <Col xs={12} className="mb-[26px] md:mb-0">
-          <table className="cart-products  mb-[60px] md:mb-[40px] xs:!mb-0">
+
+        <Col xs={12}>
+          <table className="cart-products mb-0">
             <thead>
               <tr className="font-serif text-[#212529] text-start">
                 <th scope="col"></th>
@@ -162,13 +210,39 @@ const CarrinhoDois = ({ produto, itens, setItensCart, user }: PropsCarrinhoConte
             </tbody>
           </table>
         </Col>
-        <Col md={!produto ? 8 : 12} className="md:mb-[20px] flex justify-start sm:justify-center">
-          <div className="coupon-code-panel flex items-center">
+
+        <Col xs={12} className="mb-[60px] md:mb-[40px] md:mt-0 mt-6">
+          <Container>
+            <Header>Resumo da Compra</Header>
+            <BoxRow>
+              <Typography>Subtotal:</Typography>
+              <Amount>R${Number(subtotal).toFixed(2)}</Amount>
+            </BoxRow>
+            <BoxRow>
+              <Typography>Taxa de Entrega:</Typography>
+              <Amount>R${Number(taxaEntrega).toFixed(2)}</Amount>
+            </BoxRow>
+            <Footer>
+              <Typography variant="h6">Total:</Typography>
+              <Amount variant="h6">R${Number(subtotal + taxaEntrega).toFixed(2)}</Amount>
+            </Footer>
+          </Container>
+        </Col>
+
+        <Col md={!produto ? 8 : 12} className="md:mb-[20px] flex flex-col justify-start sm:justify-center">
+          {(cupom === -1) && (
+            <Typography className='pl-3 pb-2' color="error">
+              Código invalido
+            </Typography>
+          )}
+          <div className="coupon-code-panel flex w-fit sm:w-full items-center">
             <input type="text" placeholder="Código promocional" className="relative" />
             <i className="feather-scissors absolute left-5"></i>
-            <a aria-label="shopping" onClick={() => { }} className="btn apply-coupon-btn text-uppercase border-hidden">Aplicar</a>
+            <a aria-label="shopping" onClick={() => setCupom(-1)} className="btn apply-coupon-btn text-uppercase border-hidden">Aplicar</a>
           </div>
+
         </Col>
+
         {
           !produto &&
           <Col md={4} className="flex md:mb-[20px] justify-end sm:justify-center">
@@ -177,6 +251,7 @@ const CarrinhoDois = ({ produto, itens, setItensCart, user }: PropsCarrinhoConte
             </Button>
           </Col>
         }
+
       </Row>
     </CheckoutContainer>
   );

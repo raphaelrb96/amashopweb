@@ -12,6 +12,7 @@ import ResponsiveAppBar from "../../components/Headers/ResponsiveAppBar";
 import { ItemCart } from "../../types/ItemCart";
 import RodapeUm from "../../components/Rodape/RodapeUm";
 import { useUser } from "../../context/userContext";
+import { Metadata } from "next";
 
 let itemCompraNovo = (produto: ProdutoType | DocumentData | any): ItemCart => {
 
@@ -26,7 +27,7 @@ let itemCompraNovo = (produto: ProdutoType | DocumentData | any): ItemCart => {
         largura: produto.largura,
         altura: produto.altura,
         comprimento: produto.comprimento,
-        valor: Number(produto.valor),
+        valor: Number(String(produto?.valor).replace(/\s/g, '')),
         garantia: produto.garantia,
         modelo: '',
         quantidade: 1,
@@ -102,6 +103,7 @@ const Index = () => {
             await getProduto(idFinal).then((prod) => {
                 console.log(prod)
                 if (prod) {
+                    document.title = prod.nome;
                     setProduto(prod);
                     setItemCart(itemCompraNovo(prod));
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -123,7 +125,7 @@ const Index = () => {
 
     return (
         <>
-            <ResponsiveAppBar position="sticky" color="primary" />
+            <ResponsiveAppBar elevation={12} position="sticky" color="primary" />
             <Container>
                 <ProdutoMainContent
                     produto={produto}
@@ -145,7 +147,6 @@ const Index = () => {
         </>
     )
 }
-
 
 
 export default Index
