@@ -22,9 +22,6 @@ export default function RootLayout({
       <html>
         <head>
           
-          <link rel="icon" href="/favicon.ico" />
-          <meta name="facebook-domain-verification" content="h2rfx1t31eptpcb2tf5m586f0nnkpl" />
-          <meta name="google-site-verification" content="lQ_41-YA1ewDsfnQ_5lQkY1OU57WmnIKmNVPFdOkCAo" />
           <title>Lampada Câmera</title>
           <meta property="og:title" content="Lampada Câmera 360°"></meta>
           <meta property="og:description" content="Mantenha sua casa protegida o dia inteiro e gastando pouco. A Lampada Câmera de Segurança Inteligente possui rotação de 360 graus que permite ampla visão e controle via celular, facilitando o acesso a qualquer hora ao sistema de monitoramento da sua propriedade, mesmo estando longe!"></meta>

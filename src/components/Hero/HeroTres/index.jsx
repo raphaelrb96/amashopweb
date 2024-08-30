@@ -29,10 +29,12 @@ const HeroTres = (props) => {
             >
 
                 <Container className="">
-                    <Grid container className="items-start justify-center content-center z-[1] relative overflow-hidden">
-                        <Grid item md={6} className="sm:mb-[4px]  overflow-hidden">
-                            <h6 className="font-serif font-semibold text-[#eff3ef] uppercase mb-[16px]">{subhead}</h6>
-                            <h2 className="font-serif py-2 font-bold uppercase text-gradient bg-gradient-to-r from-[#C7FFED] via-[#D8FFDB] to-[#DAFDBA] mb-[25px] tracking-[-2px]"> {headline}</h2>
+                    <Grid container className="items-start justify-center content-center z-[1] relative flex overflow-hidden">
+                        <Grid item order={{ xs: 1, sm: 2, md: 1 }} xs={12}>
+                            <h6 className="font-serif font-semibold text-[#eff3ef] uppercase sm:w-full w-1/2 mb-[16px]">{subhead}</h6>
+                        </Grid>
+                        <Grid item md={6} order={{ xs: 3, sm: 3, md: 2 }} className="sm:mb-[4px] overflow-hidden">
+                            <h3 className="font-serif sm:text-[42px] py-2 font-bold uppercase text-gradient bg-gradient-to-r from-[#C7FFED] via-[#D8FFDB] to-[#DAFDBA] mb-[25px] tracking-[-2px]"> {headline}</h3>
 
                             <ListaSimples theme="text-gray-100 my-0" className="mx-0 list-style-02 w-[95%]" data={list} />
                             {
@@ -42,18 +44,18 @@ const HeroTres = (props) => {
                                         {btnExtra ? <Buttons ariaLabel="link for modal button" onClick={clickExtra ? clickExtra : null} className="font-medium font-serif xs:!p-0 uppercase btn-link after:h-[2px] md:text-md md:mb-[15px] after:bg-gray-300 hover:text-gray-400 text-gray-300" color="#ffffff" size="xl" title={btnExtra} /> : null}
 
                                         <span className="flex items-center justify-center sm:mb-[4px] mb-[6px]">
-                                            <CreditScoreIcon className={`text-[18px] text-white mr-3`}/>
+                                            <CreditScoreIcon className={`text-[18px] text-white mr-3`} />
                                             <Typography className="text-[12px] font-medium text-white text-center" variant="p">
                                                 PAGAMENTO ONLINE SEGURO
                                             </Typography>
-                                            
+
                                         </span>
                                         <span className="flex items-center justify-center sm:mb-[6px] mb-[16px]">
-                                            <GppGoodIcon className={`text-[18px] text-white mr-3`}/>
+                                            <GppGoodIcon className={`text-[18px] text-white mr-3`} />
                                             <Typography className="text-[12px] font-medium text-white text-center" variant="p">
-                                                GARANTIA DE 90 DIAS 
+                                                GARANTIA DE 90 DIAS
                                             </Typography>
-                                            
+
                                         </span>
 
                                     </div>
@@ -63,8 +65,16 @@ const HeroTres = (props) => {
 
 
                         </Grid>
+<<<<<<< HEAD
+                        <Grid item md={6} order={{ xs: 2, sm: 1, md: 3 }} className="text-right items-center justify-start sm:mt-4 md:mt-0">
+                            <img className="inline-block w-[80%] sm:w-full drop-shadow-lg object-cover sm:mb-10 sm:mt-2" src={img} alt="" />
+=======
                         <Grid item md={6} className="text-right items-center justify-start xs:mt-10 sm:mt-10 md:mt-0">
                             <img className="inline-block w-full h-auto object-fill" src="/assets/img/illustrations/escova_1.png" alt="" />
+<<<<<<< HEAD
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
+=======
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
                         </Grid>
                     </Grid>
                 </Container>

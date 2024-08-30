@@ -3,20 +3,35 @@
 import { useEffect, useState } from 'react'
 import GridProdutos from '../../components/GridProdutos';
 import { getProdutos } from '../../fetchData/getProdutos';
+<<<<<<< HEAD
 import RootLayout from './../layout';
+=======
+<<<<<<<< HEAD:src/app/lampada-camera/page.jsx
+import RootLayout from '../layout';
+========
+import RootLayout from './../layout';
+>>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4):src/app/escova-alisadora/page.jsx
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
 import TesteTres from '../../layouts/TesteTres';
 import Script from 'next/script';
 import { registerEvent } from '../../fetchData/registerEvent';
 import { Fab, Typography } from '@mui/material';
+<<<<<<< HEAD
+import { data_escova_alisadora } from '../../../objects/example_escova_alisadora';
+
+
+const obj = data_escova_alisadora;
+
+=======
 
 const obj = {
   produto: {
     urlVideo: '',
     img: '',
-    name: 'Escova Alisadora',
-    id: '148541183',
-    linkCheckout: 'https://seguro.amashops.com.br/r/QPFD16X4IR',
-    linkWhatsapp: 'https://api.whatsapp.com/send?phone=5592981414741&text=Informa%C3%A7%C3%B5es%20sobre%20a%20Escova%20Alisadora',
+    name: 'Lampada Câmera 360°',
+    id: 't1eofqhm1o',
+    linkCheckout: '',
+    linkWhatsapp: '',
     subhead: 'Resultados Profissionais em Casa',
     btn: 'Comprar Agora',
     headline: 'Tenha resultados de salão sem sair de casa, economizando tempo e dinheiro.',
@@ -251,14 +266,20 @@ const obj = {
 
 
 export const metadata = {
-  title: 'Escova Alisadora',
-}
+  //title: 'Escova Alisadora',
+};
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
 
 export default function EscovaPage() {
 
   const [produtos, setProdutos] = useState(null);
   const [pixel, setPixel] = useState(undefined);
 
+<<<<<<< HEAD
+
+  return (
+    <>
+=======
  
 
   useEffect(() => {
@@ -277,7 +298,8 @@ export default function EscovaPage() {
 
 
   return (
-    <>
+    <RootLayout>
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
 
 
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-RM7L7MGJF9" />
@@ -313,7 +335,11 @@ export default function EscovaPage() {
               fbq('init', 625741005706556);
 
               fbq('track', 'PageView');
+<<<<<<< HEAD
               fbq('track', 'ViewContent', { content_ids: ['148541183'], content_type: 'product'});
+=======
+              fbq('track', 'ViewContent', { content_ids: ['ls7mi3is96'], content_type: 'product'});
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
 
             `,
         }}
@@ -324,7 +350,11 @@ export default function EscovaPage() {
       <TesteTres object={obj} />
 
 
+<<<<<<< HEAD
     </>
+=======
+    </RootLayout>
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
   );
 
   return (

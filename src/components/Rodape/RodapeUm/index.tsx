@@ -17,7 +17,7 @@ const RodapeUm = (props: FooterProps) => {
   const { dark, spacingBottom, className } = props;
 
   const backDark = dark ? "bg-[#011F26]" : "";
-  const spacing = spacingBottom ? "pb-[86px]" : "";
+  const spacing = spacingBottom ? "pb-[96px]" : "";
   const classes = className ? className : '';
 
   return (

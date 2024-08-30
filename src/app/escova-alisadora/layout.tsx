@@ -24,9 +24,6 @@ export default function RootLayout({
       <html>
         <head>
           
-          <link rel="icon" href="/favicon.ico" />
-          <meta name="facebook-domain-verification" content="h2rfx1t31eptpcb2tf5m586f0nnkpl" />
-          <meta name="google-site-verification" content="lQ_41-YA1ewDsfnQ_5lQkY1OU57WmnIKmNVPFdOkCAo" />
           <title>Escova Alisadora</title>
           <meta property="og:title" content="Escova Alisadora 3 em 1"></meta>
           <meta property="og:description" content="Não deixe para depois a chance de ter um cabelo deslumbrante com facilidade. Aproveite nossa oferta exclusiva e descubra a revolução que a Escova Alisadora pode trazer para o seu visual. Compre agora e veja a transformação capilar com seus próprios olhos!"></meta>

@@ -29,11 +29,11 @@ const ListaExpansivel = (props) => {
                                     {item.title && 
                                         <AccordionSummary expandIcon={<ExpandMore />}>
                                             { item.time && <span className="panel-time">{item.time}</span>}
-                                            { item.title && <Typography component="h5" variant='h6' className="panel-title">{item.title}</Typography>}
+                                            { item.title && <span className="panel-title text-[18px]">{item.title}</span>}
                                             { item.author && <span className="panel-speaker">{item.author}</span>}
                                         </AccordionSummary>
                                     }
-                                    {item.content && <AccordionDetails className='pt-4'> {item.content} </AccordionDetails>}
+                                    {item.content && <AccordionDetails className='pt-4 text-md'> {item.content} </AccordionDetails>}
                                 </Accordion>
                             </motion.div>
                         )

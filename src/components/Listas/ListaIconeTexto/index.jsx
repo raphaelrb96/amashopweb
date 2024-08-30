@@ -6,6 +6,7 @@ import { memo } from "react"
 import { IconWithTextData_01 } from "../../../functions/examples"
 import { PropTypes } from "prop-types";
 import Buttons from "../../Button/Buttons"
+import { Space_Mono } from "next/font/google"
 
 
 const ListaIconeTexto = (props) => {
@@ -23,7 +24,7 @@ const ListaIconeTexto = (props) => {
         props.data.map((item, i) => {
           return (
             <Grid item key={i} xs={xs ? xs : 12} sm={sm ? sm : 12} md={md ? md : 6} lg={lg ? lg : 4} xl={xl ? xl : 4} className={`${props.theme ? ` ${props.theme}` : ""}${props.className ? ` ${props.className}` : ""}`}>
-              <div className="rounded-md justify-center content-center w-full">
+              <div className="rounded-md justify-center mb-3 content-center w-full">
                 {
                   item.img ? (
                     <img height={42} width={51} className="inline-block items-center justify-center mb-[30px]" src={item.img} alt="featurebox" />
@@ -38,7 +39,7 @@ const ListaIconeTexto = (props) => {
                 }
 
                 <div className='feature-box-content'>
-                  {item.title && <h6 className="font-medium text-[18px]">{item.title}</h6>}
+                  {item.title && <span className="font-medium text-[18px] mb-2">{item.title}</span>}
                   {item.content && <p>{item.content}</p>}
                   {props.theme === "icon-with-text-11" ? <Buttons ariaLabel="iconwithtext" href="#" className="font-medium font-serif uppercase btn-link after:h-[2px] after:bg-darkgray md:text-md md:mb-[15px]" size="xl" color="#232323" title="Read more" /> : ""}
                 </div>

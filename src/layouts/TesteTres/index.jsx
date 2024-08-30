@@ -19,7 +19,7 @@ import CopyText from "../../components/Copywriting/CopyText/index.jsx";
 import ContainerChamadaDois from "../../components/Containers/ContainerChamadaDois/index.jsx";
 import Topo from "../../components/Topo/index.tsx";
 import RodapeUm from "../../components/Rodape/RodapeUm";
-import { memo, useLayoutEffect } from 'react';
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import TextCopy from '../../components/Texto/TextCopy/index.jsx';
 import { useRouter } from 'next/navigation';
 import { DEBUG } from '../../functions/examples.jsx';
@@ -31,6 +31,31 @@ import ContainerPerguntasRespostas from '../../components/Containers/ContainerPe
 function TesteTres({ object }) {
 
     const router = useRouter();
+
+    const [isCentered, setIsCentered] = useState(false);
+    const buttonRef = useRef(null);
+    const footerRef = useRef(null);
+
+    useEffect(() => {
+        footerRef.current = document?.querySelector('footer');
+
+        if (!footerRef.current) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsCentered(entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(footerRef.current);
+
+        return () => {
+            if (footerRef.current) {
+                observer.unobserve(footerRef.current);
+            }
+        };
+    }, []);
 
     const chamadaDois = object.ctaExtra;
 
@@ -65,7 +90,7 @@ function TesteTres({ object }) {
             });
         }
 
-        if(linkCheckout === '') return;
+        if (linkCheckout === '') return;
 
         window?.location.assign(linkCheckout);
 
@@ -101,11 +126,11 @@ function TesteTres({ object }) {
 
         window?.fbq('track', 'Contact');
 
-        if(linkWhatsapp === '') return;
+        if (linkWhatsapp === '') return;
 
         window?.open(linkWhatsapp);
 
-    }
+    };
 
 
     return (
@@ -170,7 +195,15 @@ function TesteTres({ object }) {
 
             </Grid>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <div onClick={clickConversa} ref={buttonRef} className={`transition-all duration-500 ${isCentered ? 'right-1/2 translate-x-1/2' : ''}` + ' fixed shadow-2xl flex flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#20b958] bg-[#25D366] cursor-pointer'}>
+=======
             <div onClick={clickConversa} className='fixed shadow-2xl flex flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#25D366] bg-[#075E54]'>
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
+=======
+            <div onClick={clickConversa} className='fixed shadow-2xl flex flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#25D366] bg-[#075E54]'>
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
                 <i className={`text-[28px] text-white mr-3 fa-brands fa-whatsapp`}></i>
                 <Typography className='text-white text-lg'>
                     Iniciar Conversa

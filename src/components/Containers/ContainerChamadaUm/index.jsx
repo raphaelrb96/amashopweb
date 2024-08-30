@@ -38,7 +38,15 @@ const ContainerChamadaUm = (props) => {
         loop={true}
         poster="https://via.placeholder.com/1920x1080"
         overlay={["#003840", "#005A5B", "#007369", "#008C72", "#02A676"]}
+<<<<<<< HEAD
+<<<<<<< HEAD
+        opacity="0.9"
+=======
         opacity="0.90"
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
+=======
+        opacity="0.90"
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
       >
         <Container>
           <Grid container className="z-[1] relative ">
@@ -51,14 +59,29 @@ const ContainerChamadaUm = (props) => {
 
               <h3 className="heading-4 xs:hidden block font-serif font-medium mx-0 text-gray-100 mt-10 mb-4">
 
-                <TextoAnimado duration={3000} className="font-semibold mt-2" color="#DAFDBA" animation="slide" data={keys}>
+                <TextoAnimado duration={3000} className="font-semibold mb-6 mt-2" color="#DAFDBA" animation="slide" data={keys}>
 
                 </TextoAnimado>
 
               </h3>
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+              <ListaSimples theme="text-gray-100" className="mx-0 text-md mt-6 list-style-02 w-[95%]" data={props.data.list} />
+
+
+            </Grid>
+
+            <Grid lg={5} md={5} sm={10} xs={12} className="content xs:pl-0 sm:pl-0 pl-12 landscape:px-[15px]" item>
+
+              <div className="xs:text-center mt-[80px] md:mt-[45px] sm:mt-[65px] px-0 xs:justify-center sm:justify-center items-center landscape:mt-[50px]">
+=======
               <ListaSimples theme="text-gray-100" className="mx-0 list-style-02 w-[95%]" data={props.data.list} />
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
+=======
+              <ListaSimples theme="text-gray-100" className="mx-0 list-style-02 w-[95%]" data={props.data.list} />
+>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
 
               <div className="xs:text-center mt-[80px] md:mt-[45px] xs:mt-[55px] px-0 xs:justify-center sm:justify-center landscape:md:mt-[60px]">
                 <Buttons ariaLabel="link for pricing-packages" href={!click ? "#compre" : null} onClick={click ? click : null} icon="fa-solid fa-money-bill-wave" className="mr-[0px] xs:mx-0 xs:w-full sm:mx-[14px] font-serif hover:text-gray-100 uppercase mb-[25px]" themeColor={["#008C72", "#02A676"]} size="xl" color="#fff" title={btn} />
