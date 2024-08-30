@@ -195,15 +195,8 @@ function TesteTres({ object }) {
 
             </Grid>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <div onClick={clickConversa} ref={buttonRef} className={`transition-all duration-500 ${isCentered ? 'right-1/2 translate-x-1/2' : ''}` + ' fixed shadow-2xl flex flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#20b958] bg-[#25D366] cursor-pointer'}>
-=======
-            <div onClick={clickConversa} className='fixed shadow-2xl flex flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#25D366] bg-[#075E54]'>
->>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
-=======
-            <div onClick={clickConversa} className='fixed shadow-2xl flex flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#25D366] bg-[#075E54]'>
->>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
+
+            <div onClick={clickConversa} ref={buttonRef} className={`transition-all duration-[5000] ${isCentered ? 'left-1/2 transform -translate-x-1/2 ' : ''}` + ' fixed shadow-2xl flex max-w-[400px] flex-row items-center text-center justify-center content-center z-[20000] right-6 bottom-6 py-3 px-6 rounded-[24px] hover:bg-[#20b958] bg-[#25D366] cursor-pointer'}>
                 <i className={`text-[28px] text-white mr-3 fa-brands fa-whatsapp`}></i>
                 <Typography className='text-white text-lg'>
                     Iniciar Conversa

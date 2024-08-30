@@ -25,7 +25,7 @@ const ListaExpansivel = (props) => {
                             <motion.div className={`accordion-item-wrapper`}
                                 key={key}
                             >
-                                <Accordion className='mt-3 mb-3' elevation={0} expanded={expanded === key} disableGutters={false} onChange={handleChange(key)}>
+                                <Accordion className='mt-3 mb-3' elevation={2} expanded={expanded === key} disableGutters={false} onChange={handleChange(key)}>
                                     {item.title && 
                                         <AccordionSummary expandIcon={<ExpandMore />}>
                                             { item.time && <span className="panel-time">{item.time}</span>}

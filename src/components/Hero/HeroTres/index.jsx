@@ -12,10 +12,12 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 const HeroTres = (props) => {
 
-    const { btnExtra, btn, subhead, headline, description, list } = props.data;
+    const { btnExtra, btn, subhead, headline, description, img, list } = props.data;
     const { click, clickExtra, hiddenButtons } = props;
 
-    const urlVideo = 'https://www.shutterstock.com/shutterstock/videos/1074669659/preview/stock-footage-super-slow-motion-of-beautiful-healthy-long-smooth-flowing-brown-hair.webm';
+    //const urlVideo = 'https://www.shutterstock.com/shutterstock/videos/1074669659/preview/stock-footage-super-slow-motion-of-beautiful-healthy-long-smooth-flowing-brown-hair.webm';
+    const urlVideo = '/assets/img/backgrounds/background-abstract.mp4';
+    const back = '/assets/img/backgrounds/trianglify.png';
 
     return (
         <section >
@@ -23,7 +25,7 @@ const HeroTres = (props) => {
                 className="py-[60px] lg:py-[60px] md:py-[55px] sm:py-[50px] xs:py-[40px] h-full bg-slate-950"
                 src={urlVideo}
                 loop={true}
-                poster="https://via.placeholder.com/1920x1080"
+                poster={back}
                 overlay={["#003840", "#005A5B", "#007369", "#008C72", "#02A676"]}
                 opacity="0.9"
             >
@@ -65,16 +67,8 @@ const HeroTres = (props) => {
 
 
                         </Grid>
-<<<<<<< HEAD
                         <Grid item md={6} order={{ xs: 2, sm: 1, md: 3 }} className="text-right items-center justify-start sm:mt-4 md:mt-0">
                             <img className="inline-block w-[80%] sm:w-full drop-shadow-lg object-cover sm:mb-10 sm:mt-2" src={img} alt="" />
-=======
-                        <Grid item md={6} className="text-right items-center justify-start xs:mt-10 sm:mt-10 md:mt-0">
-                            <img className="inline-block w-full h-auto object-fill" src="/assets/img/illustrations/escova_1.png" alt="" />
-<<<<<<< HEAD
->>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
-=======
->>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4)
                         </Grid>
                     </Grid>
                 </Container>

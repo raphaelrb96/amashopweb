@@ -25,8 +25,8 @@ const ListaItemClean = (props) => {
                         </div>
                         
                         <div className="p-[30px] sm:px-[25px] bg-white">
-                            <span className="text-md font-semibold text-darkgray uppercase"> {item.date} </span>
-                            <a aria-label="link" className="font-medium text-gray-600 font-serif block" > {item.title} </a>
+                            <span className="text-md font-semibold text-darkgray uppercase"> {item.title} </span>
+                            <a aria-label="link" className="font-medium text-gray-600 mt-2 font-serif block" > {item.content} </a>
                         </div>
                         
                     </motion.div>

@@ -3,11 +3,9 @@
 import { useEffect, useState } from 'react'
 import GridProdutos from '../../components/GridProdutos';
 import { getProdutos } from '../../fetchData/getProdutos';
-<<<<<<<< HEAD:src/app/lampada-camera/page.jsx
+
 import RootLayout from '../layout';
-========
 import RootLayout from './../layout';
->>>>>>>> parent of 0d725a4 (Extrutura de LandingPage v4):src/app/escova-alisadora/page.jsx
 import TesteTres from '../../layouts/TesteTres';
 import Script from 'next/script';
 import { registerEvent } from '../../fetchData/registerEvent';

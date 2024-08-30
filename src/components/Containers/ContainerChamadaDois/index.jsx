@@ -38,9 +38,9 @@ const ContainerChamadaDois = (props) => {
 
 
   return (
-    <div id="compre" className="bg-gradient-to-r from-[#003840] via-[#005A5B] to-[#007369] w-full py-[80px] lg:py-[80px] md:py-[65px] sm:py-[50px] xs:py-[40px]">
+    <div id="compre" className="bg-gradient-to-r from-[#003840] via-[#005A5B] to-[#007369] flex justify-center items-center w-full py-[50px] lg:py-[40px] md:py-[45px] sm:py-[50px] xs:py-[40px]">
 
-      <Grid container alignItems={"center"} justifyContent={"center"} alignContent={"center"} className="px-[26px] md:justify-center lg:justify-between xl:justify-between">
+      <Grid container maxWidth={"xl"} alignItems={"center"} justifyContent={"center"} alignContent={"center"} className="px-[26px] md:justify-center lg:justify-between xl:justify-between">
 
         <Grid lg={7} md={8} className="font-serif md:mb-6 sm:mb-4 xs:mb-4" item>
           <h2 className="heading-4 font-serif font-medium text-gray-100 mb-6 w-[100%] lg:w-[90%] md:mb-4 xs:mb-6">
@@ -53,7 +53,7 @@ const ContainerChamadaDois = (props) => {
 
         </Grid>
 
-        <Grid lg={4} md={4} className="items-center text-center landscape:px-[2px]" item>
+        <Grid lg={4} md={4} className="items-center text-center landscape:px-[2px] pb-[20px]" item>
 
           <div className="xs:text-center mb-[30px] mt-[80px] md:mt-[45px] xs:mt-[55px] px-0 xs:justify-center sm:justify-center landscape:md:mt-[60px]">
             <Buttons ariaLabel="link for pricing-packages" href={!click ? "#compre" : null} onClick={click ? click : null} icon="fa-solid fa-money-bill-wave" className="mr-[0px] xs:mx-0 xs:w-full sm:mx-[14px] font-serif hover:text-gray-100 uppercase mb-[25px]" themeColor={["#008C72", "#02A676"]} size="xl" color="#fff" title={btn} />

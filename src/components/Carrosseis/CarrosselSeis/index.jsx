@@ -60,39 +60,17 @@ const CarrosselSeis = (props) => {
           <button aria-label='swiper btn' onClick={slideprev} className="swiper-prev top-0 bottom-0 pl-0 text-[20px] sm:text-[22px] md:text-[36px] lg:text-[45px] xl:text-[50px]"><i className="line-icon-Arrow-OutLeft text-extra-light-gray text-[#b7b7b7]"></i></button>
         </Grid>
 
-        <Grid spacing={1} xs={10} md={9} className="px-2">
-          <Swiper
-            {...props.carouselOption}
-            ref={swiperThumbRef}
-            onSwiper={setThumbsSwiper}
-            loop={true}
-            centeredSlides={true}
-            allowTouchMove={false}
-            spaceBetween={0}
-            slidesPerView={1}
-            watchSlidesProgress={true}
-            modules={[Thumbs, Autoplay]}
-            className="slider-review-image-thumbs px-3"
-            onClick={handleSlideClick}>
-            {
-              props.data.map((item, i) => {
-                return (
-                  <SwiperSlide className="p-[2px]" key={i}>
-                    {item.img && <img width="" height="" className="rounded-3xl w-full h-full min-h-[250px] object-cover mx-auto" alt="" src={item.img} />}
-                  </SwiperSlide>
-                )
-              })
-            }
-          </Swiper>
+        <Grid spacing={1} xs={10} md={9} className="">
+
           <Swiper
             {...props.carouselOption}
             ref={swiperRef}
-            spaceBetween={0}
+            spaceBetween={15}
             allowTouchMove={false}
             loop={true}
             modules={[Thumbs, Autoplay]}
             thumbs={{ swiper: (thumbsSwiper && !thumbsSwiper.destroyed) ? thumbsSwiper : null }}
-            className="mt-[7%]">
+            className="">
             {
               props.data.map((item, i) => {
                 return (
@@ -105,7 +83,35 @@ const CarrosselSeis = (props) => {
               })
             }
           </Swiper>
+
+          <Swiper
+            {...props.carouselOption}
+            ref={swiperThumbRef}
+            onSwiper={setThumbsSwiper}
+            loop={true}
+            centeredSlides={true}
+            allowTouchMove={false}
+            spaceBetween={15}
+            slidesPerView={1}
+            watchSlidesProgress={true}
+            modules={[Thumbs, Autoplay]}
+            className="mt-[24px] px-3"
+            onClick={handleSlideClick}>
+            {
+              props.data.map((item, i) => {
+                return (
+                  <SwiperSlide className="" key={i}>
+                    {item.img && <img width="" height="" className="rounded-3xl w-full h-full min-h-[250px] object-cover mx-auto" alt="" src={item.img} />}
+                  </SwiperSlide>
+                )
+              })
+            }
+          </Swiper>
+
+          
+
         </Grid>
+
         <Grid alignContent={'center'} alignItems={'center'} justifyContent={'center'} className="flex" xs={1}>
           <button aria-label='swiper btn' onClick={slidenext} className="swiper-next pr-0  text-[20px] sm:text-[22px] md:text-[36px] lg:text-[45px] xl:text-[50px]"><i className="line-icon-Arrow-OutRight text-extra-light-gray text-[#b7b7b7]"></i></button>
         </Grid>

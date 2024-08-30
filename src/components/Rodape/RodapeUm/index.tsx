@@ -21,9 +21,9 @@ const RodapeUm = (props: FooterProps) => {
   const classes = className ? className : '';
 
   return (
-    <footer className={`py-[30px] px-[30px] relative mt-auto bottom-0 order-last w-full ${backDark} ${spacing} ${classes}`}>
+    <footer className={`py-[30px] px-[30px] flex justify-center items-center relative mt-auto bottom-0 order-last w-full ${backDark} ${spacing} ${classes}`}>
 
-      <Grid container alignItems={"center"} justifyContent={"center"} alignContent={"center"} className="items-center">
+      <Grid container maxWidth={'xl'} alignItems={"center"} justifyContent={"center"} alignContent={"center"} className="items-center">
 
         <Grid lg={5} md={5} sm={12} xs={12} className="sm:mb-[15px] md:order-2" item>
           <ul className="flex xs:flex-col sm:text-center sm:justify-center gap-x-[35px] md:gap-x-[20px] gap-y-[7px]">
