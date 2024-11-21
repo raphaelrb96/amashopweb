@@ -58,7 +58,7 @@ const RodapeCheckout: React.FC = () => {
                             <Typography variant="h6">Satisfação</Typography>
                         </IconBox>
                         <TextBody variant="body2">
-                            Garantimos sua satisfação com nossos produtos e serviços.
+                            Garantimos sua satisfação em todos nossos produtos.
                         </TextBody>
                     </Grid>
                 </Grid>

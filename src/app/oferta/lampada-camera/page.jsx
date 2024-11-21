@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import GridProdutos from '../../components/GridProdutos';
-import { getProdutos } from '../../fetchData/getProdutos';
+import GridProdutos from '../../../components/GridProdutos';
+import { getProdutos } from '../../../fetchData/getProdutos';
 
-import RootLayout from '../layout';
-import RootLayout from './../layout';
-import TesteTres from '../../layouts/TesteTres';
+import RootLayout from './layout';
+import TesteTres from '../../../layouts/TesteTres';
 import Script from 'next/script';
-import { registerEvent } from '../../fetchData/registerEvent';
+import { registerEvent } from '../../../fetchData/registerEvent';
 import { Fab, Typography } from '@mui/material';
 
 const obj = {

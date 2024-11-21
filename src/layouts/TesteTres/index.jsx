@@ -93,6 +93,7 @@ function TesteTres({ object }) {
         if (linkCheckout === '') return;
 
         window?.location.assign(linkCheckout);
+        //router.push('/carrinho?prod=Game+Stick+2.4+10+Mil+Jogos_1661797389295')
 
 
 

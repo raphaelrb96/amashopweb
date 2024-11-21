@@ -165,6 +165,11 @@ const CheckoutUm = ({ finishOrder }: PropsCheckoutUm) => {
     // Estado para controlar o step ativo
     const [activeStep, setActiveStep] = useState(0);
 
+    const trackerInfoPay = () => {
+        const idTrack = 
+        (window as any)?.fbq('track', 'AddPaymentInfo');
+    };
+
     // Função para avançar para o próximo step
     const handleNextStep = async (values: FormValues, actions: any) => {
         const isValid = await actions.validateForm();
@@ -172,6 +177,9 @@ const CheckoutUm = ({ finishOrder }: PropsCheckoutUm) => {
             if (activeStep === stepsData.length - 1) {
                 finishOrder(values);
             } else {
+                if (activeStep === 1) {
+                    trackerInfoPay();
+                }
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
             }
         } else {

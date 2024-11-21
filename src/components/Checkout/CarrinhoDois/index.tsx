@@ -223,8 +223,8 @@ const CarrinhoDois = ({ produto, itens, setItensCart, user }: PropsCarrinhoConte
               <Amount>R${Number(taxaEntrega).toFixed(2)}</Amount>
             </BoxRow>
             <Footer>
-              <Typography variant="h6">Total:</Typography>
-              <Amount variant="h6">R${Number(subtotal + taxaEntrega).toFixed(2)}</Amount>
+              <Typography variant="h4">Total:</Typography>
+              <Amount variant="h4">R${Number(subtotal + taxaEntrega).toFixed(2)}</Amount>
             </Footer>
           </Container>
         </Col>

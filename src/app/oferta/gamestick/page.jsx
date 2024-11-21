@@ -13,7 +13,7 @@ import { data_gamestick } from '../../../objects/example_gamestick';
 const obj = data_gamestick;
 
 
-export default function EscovaPage() {
+export default function GamestickPage() {
 
   const [produtos, setProdutos] = useState(null);
   const [pixel, setPixel] = useState(undefined);
@@ -57,7 +57,7 @@ export default function EscovaPage() {
               fbq('init', 625741005706556);
 
               fbq('track', 'PageView');
-              fbq('track', 'ViewContent', { content_ids: [''], content_type: 'product'});
+              fbq('track', 'ViewContent', { content_ids: ['game-stick-4k'], content_type: 'product'});
 
             `,
         }}

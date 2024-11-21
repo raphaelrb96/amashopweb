@@ -18,6 +18,7 @@ import RodapeCheckout from '../../components/Rodape/RodapeCheckout';
 import Topo from '../../components/Topo';
 import { CompraObj } from '../../types/CompraObj';
 import { registerOrder } from '../../fetchData/orderServices';
+import Script from 'next/script';
 
 
 interface FormValues {
@@ -234,6 +235,25 @@ const CheckoutScreen: React.FC = () => {
   const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
+  const trackerPurchase = (objOrder: CompraObj) => {
+
+    let metadata: any = [];
+    objOrder.itensCompra.map(item => {
+      metadata.push({
+        id: item.id,
+        quantity: item.quantidade
+      });
+    });
+
+    (window as any)?.fbq('track', 'Purchase', {
+      value: objOrder.total,
+      currency: 'USD',
+      contents: metadata,
+      content_type: 'product'
+    });
+
+  };
+
   const concluirPedido = async (value: FormValues) => {
     if (loadFinish) return;
     setLoadFinish(true);
@@ -245,6 +265,7 @@ const CheckoutScreen: React.FC = () => {
     if (!objOrder) return;
     const sucessRegister = await registerOrder(objOrder, isCart, user.uid);
     if (sucessRegister) {
+      trackerPurchase(objOrder);
       router.replace('/compra-confirmada');
     }
   };
@@ -311,6 +332,7 @@ const CheckoutScreen: React.FC = () => {
 
   }, [searchParams, router, user]);
 
+
   if ((produto === undefined && itensCart === undefined) || loadFinish) return (
     <Box
       className="py-6 h-full flex flex-col w-full min-h-screen"
@@ -340,6 +362,28 @@ const CheckoutScreen: React.FC = () => {
 
   return (
     <Box className='h-full flex flex-col min-h-screen'>
+      <Script
+        id="fb-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', 3567412100159486);
+              fbq('init', 625741005706556);
+
+              fbq('track', 'PageView');
+              fbq('track', 'InitiateCheckout');
+
+            `,
+        }}
+      />
       {!produto && <ResponsiveAppBar elevation={12} position="sticky" color="primary" />}
       {produto && <Topo dark title={'GARANTIA DE SEGURANÇA E SATISFAÇÃO'} />}
       <Box className='flex justify-center'>

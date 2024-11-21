@@ -2,7 +2,7 @@
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google';
-import UserProvider from '../../context/userContext';
+import UserProvider from '../../../context/userContext';
 import { AppProps } from 'next/app';
 
 

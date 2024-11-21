@@ -33,7 +33,7 @@ const HeroTres = (props) => {
                 <Container className="">
                     <Grid container className="items-start justify-center content-center z-[1] relative flex overflow-hidden">
                         <Grid item order={{ xs: 1, sm: 2, md: 1 }} xs={12}>
-                            <h6 className="font-serif font-semibold text-[#eff3ef] uppercase sm:w-full w-1/2 mb-[16px]">{subhead}</h6>
+                            <h6 className="font-serif font-semibold text-[#eff3ef] uppercase sm:w-full w-1/2 mb-[16px] text-sm sm:text-xlg">{subhead}</h6>
                         </Grid>
                         <Grid item md={6} order={{ xs: 3, sm: 3, md: 2 }} className="sm:mb-[4px] overflow-hidden">
                             <h3 className="font-serif sm:text-[42px] py-2 font-bold uppercase text-gradient bg-gradient-to-r from-[#C7FFED] via-[#D8FFDB] to-[#DAFDBA] mb-[25px] tracking-[-2px]"> {headline}</h3>
